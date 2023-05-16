@@ -56,6 +56,7 @@ function getPasswordOptions() {
    return passwordOptions;
 }
 
+// Stored arrays for each type of character
 var lowerCase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 var upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 var numCharacters = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -87,14 +88,38 @@ function generatePassword() {
 
    // Conditional statement that adds array of special characters into array of possible characters based on user input
   // Push new random special character to guaranteedCharacters
-  if (options.hasSpecialCharacters) {
+  if (options.special === true) {
     possibleCharacters = possibleCharacters.concat(specialCharacters);
     guaranteedCharacters.push(getRandom(specialCharacters));
   }
 
-  
+  // Conditional statement that adds array of lower case characters into array of possible characters based on user input
+  if (options.lower === true) {
+    possibleCharacters = possibleCharacters.concat(lowerCase);
+    guaranteedCharacters.push(getRandom(lowerCase));
+  }
 
+  // Conditional statement that adds array of upper case characters into array of possible characters based on user input
+  if (options.upper === true) {
+    possibleCharacters = possibleCharacters.concat(upperCase);
+    guaranteedCharacters.push(getRandom(upperCase));
+  }
 
+  // Conditional statement that adds array of numerical characters into array of possible characters based on user input
+  if (options.numeric === true) {
+    possibleCharacters = possibleCharacters.concat(numCharacters);
+    guaranteedCharacters.push(getRandom(numCharacters));
+  }
+
+  // for loop to add characters to the result array
+  for (var i = 0; i < options.length; i++) {
+    if (i < guaranteedCharacters.length) {
+      result.push(guaranteedCharacters[i]);
+    } else {
+      result.push(getRandom(possibleCharacters));
+    }
+  }
+  console.log(result);
     // Transform the result into a string and pass into writePassword
     return result.join('');
 }
