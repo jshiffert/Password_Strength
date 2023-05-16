@@ -16,8 +16,8 @@ function getPasswordOptions() {
     return null;
   }
   // Conditional statement to check if password length is at least 8 characters. Prompts end if this evaluates false
-  if (length < 8) {
-    alert('Password must be at least 8 characters');
+  if (length < 8||length > 128) {
+    alert('Password must be at least 8 characters and fewer than 128 characters');
     return null;
   }
 
@@ -119,7 +119,7 @@ function generatePassword() {
       result.push(getRandom(possibleCharacters));
     }
   }
-  console.log(result);
+
     // Transform the result into a string and pass into writePassword
     return result.join('');
 }
