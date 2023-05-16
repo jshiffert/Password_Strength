@@ -38,10 +38,19 @@ function getPasswordOptions() {
     'Click OK to confirm including special characters.'
   );
 
+  // Conditional statement to check if at least one character type has been selected
+  if (hasLowerCase === false && hasUpperCase === false && hasNumbers === false && hasSpecialCharacters === false) {
+    alert('Password needs to contain at least one character type in order to be generated.');
+    return null;
+  }
+
    // Object to store user input
    var passwordOptions = {
     length: length,
-    // add more properties and values here
+    lower: hasLowerCase,
+    upper: hasUpperCase,
+    numeric: hasNumbers,
+    special: hasSpecialCharacters
    }
 
    return passwordOptions;
